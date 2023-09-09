@@ -7,4 +7,16 @@ import Test exposing (..)
 
 suite : Test
 suite =
-    todo "Implement our first test. See https://package.elm-lang.org/packages/elm-explorations/test/latest for how to do this!"
+    describe "mekin gumarac mek" [
+        test "take mekin and gumarac mek" <|
+            \() ->
+                let
+                  x = 2
+                  c = 6
+                in
+                  Expect.equal (x + c) (2 + 6)
+
+    ,  test "alo alo" <|
+          \_ ->
+            Expect.equal {g = 1, h = 1} {g = 1, h = 1}
+    ]
