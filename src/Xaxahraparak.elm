@@ -8,11 +8,11 @@ module Xaxahraparak exposing (..)
 
 type alias OneDXaxahraparak = List OneDYachejka
 type alias Coordinate = Int
-type Occupant = Garaj | Eerexa
+type Occupant = Garaj | Erexa
 
 type alias OneDYachejka =
   {
-    occupant: Maybe Occupant
+    occupants: List Occupant
     , x: Coordinate
   }
 
@@ -20,15 +20,20 @@ type alias OneDYachejka =
 spawn: Int -> OneDXaxahraparak
 spawn size =
   List.range 0 (size - 1)
-  |> List.map (\coordinate -> {occupant = Nothing, x = coordinate})
+  |> List.map (\coordinate -> {occupants = [], x = coordinate})
 
 
 populate: OneDXaxahraparak -> Coordinate -> Occupant -> OneDXaxahraparak
-populate xaxahraparak coordinate occupant = Debug.todo "zangel eiq"
+populate xaxahraparak coordinate occupant =
+  case (xaxahraparak, coordinate) of
+    ([], _) -> []
+    ((x::xs), 0) -> {occupants = occupant :: x.occupants, x = x.x} :: xs
+    ((x::xs), c) -> x :: (populate xs (coordinate - 1) occupant)
 
--- 0 +
--- 000
--- 00e
+
+-- 0    +
+-- 000  +
+-- 00e  +
 -- |-0g0
 -- |- 00e -> 0e0
 

@@ -2,7 +2,7 @@ module XaxahraparakSpec exposing (..)
 
 import Expect exposing (Expectation)
 import Test exposing (..)
-import Xaxahraparak exposing (spawn)
+import Xaxahraparak exposing (spawn, populate, Occupant(..))
 
 suite : Test
 suite =
@@ -14,14 +14,36 @@ suite =
       test "creating prisitne xaxahraparaks" <|
         \() ->
           let
-            gaugeXaxahraparak = [{occupant = Nothing, x = 0}, {occupant = Nothing, x = 1}, {occupant = Nothing, x = 2}]
+            gaugeXaxahraparak = [{occupants = [], x = 0}, {occupants = [], x = 1}, {occupants = [], x = 2}]
             realXaxahraparak = spawn 3
           in
             Expect.equal realXaxahraparak gaugeXaxahraparak
 
-      , test "ete xaxahraparaki chaperic dus a qcum, hin vichakn a mnum" <| pending
+      , test "ete xaxahraparaki chaperic dus a qcum, hin vichakn a mnum" <|
+        \() ->
+          let
+            initialXaxahraparak = [{occupants = [], x = 0}, {occupants = [], x = 1}]
+            populatedXaxahraparak = populate initialXaxahraparak 3 Erexa
+          in
+            Expect.equal initialXaxahraparak populatedXaxahraparak
 
-      , test "ete nes a qcum, de hajtnvum a" <| pending
+      , test "ete nes a qcum, de hajtnvum a" <|
+        \() ->
+          let
+            initialXaxahraparak = [{occupants = [], x = 0}, {occupants = [], x = 1}]
+            populatedXaxahraparak = populate initialXaxahraparak 1 Erexa
+            gaugeXaxahraparak = [{occupants = [], x = 0}, {occupants = [Erexa], x = 1}]
+          in
+            Expect.equal populatedXaxahraparak gaugeXaxahraparak
 
-      , test "ete qcac texy arden zbaxvac a, darnum en erku hogov" <| pending
+      , test "ete qcac texy arden zbaxvac a, darnum en erku hogov" <|
+        \() ->
+          let
+            prepopulatedXaxahraparak = [{occupants = [], x = 0}, {occupants = [Erexa], x = 1}]
+            repopulatedXaxahraparak = populate prepopulatedXaxahraparak 1 Erexa
+            gaugeXaxahraparak = [{occupants = [], x = 0}, {occupants = [Erexa, Erexa], x = 1}]
+          in
+            Expect.equal repopulatedXaxahraparak gaugeXaxahraparak
+
     ]
+
