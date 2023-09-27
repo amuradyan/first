@@ -31,8 +31,8 @@ spawn size =
         |> List.map (\coordinate -> { occupants = [], x = coordinate })
 
 
-populate : OneDXaxahraparak -> Coordinate -> Occupant -> OneDXaxahraparak
-populate xaxahraparak coordinate occupant =
+populate : Coordinate -> Occupant -> OneDXaxahraparak -> OneDXaxahraparak
+populate coordinate occupant xaxahraparak =
     case ( xaxahraparak, coordinate ) of
         ( [], _ ) ->
             []
@@ -41,7 +41,7 @@ populate xaxahraparak coordinate occupant =
             { occupants = occupant :: x.occupants, x = x.x } :: xs
 
         ( x :: xs, _ ) ->
-            x :: populate xs (coordinate - 1) occupant
+            x :: populate (coordinate - 1) occupant  xs
 
 
 

@@ -30,7 +30,7 @@ suite =
                         [ { occupants = [], x = 0 }, { occupants = [], x = 1 } ]
 
                     populatedXaxahraparak =
-                        populate initialXaxahraparak 3 Erexa
+                        populate 3 Erexa initialXaxahraparak
                 in
                 Expect.equal initialXaxahraparak populatedXaxahraparak
         , test "ete nes a qcum, de hajtnvum a" <|
@@ -40,7 +40,7 @@ suite =
                         [ { occupants = [], x = 0 }, { occupants = [], x = 1 } ]
 
                     populatedXaxahraparak =
-                        populate initialXaxahraparak 1 Erexa
+                        populate 1 Erexa initialXaxahraparak
 
                     gaugeXaxahraparak =
                         [ { occupants = [], x = 0 }, { occupants = [ Erexa ], x = 1 } ]
@@ -53,7 +53,7 @@ suite =
                         [ { occupants = [], x = 0 }, { occupants = [ Erexa ], x = 1 } ]
 
                     repopulatedXaxahraparak =
-                        populate prepopulatedXaxahraparak 1 Erexa
+                        populate 1 Erexa prepopulatedXaxahraparak
 
                     gaugeXaxahraparak =
                         [ { occupants = [], x = 0 }, { occupants = [ Erexa, Erexa ], x = 1 } ]
