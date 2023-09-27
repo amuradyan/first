@@ -7,8 +7,8 @@ import Test exposing (..)
 
 suite : Test
 suite =
-    describe "mekin gumarac mek" [
-        test "take mekin and gumarac mek" <|
+    describe "մեկին գումարած մեկ" [
+        test "take մեկին and գումարած մեկ" <|
             \() ->
                 let
                   x = 2
@@ -16,7 +16,7 @@ suite =
                 in
                   Expect.equal (x + c) (2 + 6)
 
-    ,  test "alo alo" <|
+    ,  test "ալօ ալօ" <|
           \_ ->
             Expect.equal {g = 1, h = 1} {g = 1, h = 1}
     ]
