@@ -1,9 +1,5 @@
 module Xaxahraparak exposing (..)
 
-import Html exposing (b)
-
-
-
 -- Rules
 -- - Ոնց կարա գառաժը երեխուն խանգարի
 -- - Երեխուն կարա ուրիշ երեխա խանգարի
@@ -68,27 +64,47 @@ type alias PlanVector =
     Int
 
 
+nextCoordinate : PlanVector -> Int -> Coordinate -> Coordinate
+nextCoordinate planVector rightLimit coordinate =
+    case planVector of
+        0 ->
+            coordinate
+
+        n ->
+            if n > 0 then
+                min rightLimit (coordinate + 1)
+
+            else
+                max 0 (coordinate - 1)
+
+
 move : PlanVector -> Coordinate -> OneDXaxahraparak -> OneDXaxahraparak
 move planVector coordinate xaxahraparak =
     let
         occupants =
             occupantsOf coordinate xaxahraparak
+
+        rightLimit =
+            List.length xaxahraparak - 1
+
+        neighbour =
+            nextCoordinate planVector rightLimit coordinate
     in
     case planVector of
         0 ->
             xaxahraparak
 
         1 ->
-            xaxahraparak |> populateMany (coordinate + 1) occupants >> clear coordinate
+            xaxahraparak |> populateMany neighbour occupants >> clear coordinate
 
         _ ->
             let
                 updatedXaxahraparak =
                     xaxahraparak
-                        |> populateMany (coordinate + 1) occupants
+                        |> populateMany neighbour occupants
                         |> clear coordinate
             in
-            move (planVector - 1) (coordinate + 1) updatedXaxahraparak
+            move (planVector - 1) neighbour updatedXaxahraparak
 
 
 occupantsOf : Coordinate -> OneDXaxahraparak -> List Occupant

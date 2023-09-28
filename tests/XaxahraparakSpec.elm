@@ -2,7 +2,7 @@ module XaxahraparakSpec exposing (..)
 
 import Expect exposing (Expectation)
 import Test exposing (..)
-import Xaxahraparak exposing (Occupant(..), clear, move, occupantsOf, populate, spawn)
+import Xaxahraparak exposing (Occupant(..), clear, move, nextCoordinate, occupantsOf, populate, spawn)
 
 
 suite : Test
@@ -59,18 +59,19 @@ suite =
                         [ { occupants = [], x = 0 }, { occupants = [ Erexa, Erexa ], x = 1 } ]
                 in
                 Expect.equal repopulatedXaxahraparak gaugeXaxahraparak
+        , test "Աշխարհից դուս գալուց գալի հագնում ա պատին ու լռվում ա" <|
+            \() ->
+                let
+                    prepopulatedXaxahraparak =
+                        [ { occupants = [ Erexa ], x = 0 }, { occupants = [], x = 1 } ]
 
-        -- , test "Աշխարհից դուս գալուց գալի հագնում ա պատին ու լռվում ա" <|
-        --     \() ->
-        --         let
-        --             prepopulatedXaxahraparak =
-        --                 [ { occupants = [ Erexa ], x = 0 }, { occupants = [], x = 1 } ]
-        --             updatedXaxahraparak =
-        --                 move 3 0 prepopulatedXaxahraparak
-        --             gaugeXaxahraparak =
-        --                 [ { occupants = [], x = 0 }, { occupants = [ Erexa ], x = 1 } ]
-        --         in
-        --         Expect.equal updatedXaxahraparak gaugeXaxahraparak
+                    updatedXaxahraparak =
+                        move 3 0 prepopulatedXaxahraparak
+
+                    gaugeXaxahraparak =
+                        [ { occupants = [], x = 0 }, { occupants = [ Erexa ], x = 1 } ]
+                in
+                Expect.equal updatedXaxahraparak gaugeXaxahraparak
         , test "Թե պետք ա կարում ա, շարժվում ա" <|
             \() ->
                 let
@@ -131,4 +132,14 @@ suite =
                         occupantsOf 0 [ { occupants = [ Erexa, Erexa, Garaj ], x = 0 } ]
                 in
                 Expect.equal occupants [ Erexa, Erexa, Garaj ]
+        , test "մեկ մեկ պետքա կարենաս գնաս ձախ" <|
+            \_ -> Expect.equal (nextCoordinate -4 8 6) 5
+        , test "բայց չափի մեջ" <|
+            \_ -> Expect.equal (nextCoordinate -2 8 0) 0
+        , test "մեկ մեկ պետքա կարենաս գնաս աջ" <|
+            \_ -> Expect.equal (nextCoordinate 3 8 2) 3
+        , test "բայց էլի չափի մեջ" <|
+            \_ -> Expect.equal (nextCoordinate 9 8 8) 8
+        , test "շարժվել ա պետք" <|
+            \_ -> Expect.equal (nextCoordinate 0 8 6) 6
         ]
