@@ -90,21 +90,25 @@ move planVector coordinate xaxahraparak =
         neighbour =
             nextCoordinate planVector rightLimit coordinate
     in
-    case planVector of
-        0 ->
-            xaxahraparak
+    if neighbour == coordinate then
+        xaxahraparak
 
-        1 ->
-            xaxahraparak |> populateMany neighbour occupants >> clear coordinate
+    else
+        case planVector of
+            0 ->
+                xaxahraparak
 
-        _ ->
-            let
-                updatedXaxahraparak =
-                    xaxahraparak
-                        |> populateMany neighbour occupants
-                        |> clear coordinate
-            in
-            move (planVector - 1) neighbour updatedXaxahraparak
+            1 ->
+                xaxahraparak |> populateMany neighbour occupants >> clear coordinate
+
+            _ ->
+                let
+                    updatedXaxahraparak =
+                        xaxahraparak
+                            |> populateMany neighbour occupants
+                            |> clear coordinate
+                in
+                move (planVector - 1) neighbour updatedXaxahraparak
 
 
 occupantsOf : Coordinate -> OneDXaxahraparak -> List Occupant
@@ -161,6 +165,6 @@ clear coordinate xaxahraparak =
 -- 000  +
 -- 00e  +
 -- |-0g0
--- |- 00e -> 0e0
+-- |- 00e -> 0e0 +
 -- type Napravlennost = Horizontal| Vertical
 -- type alias Garaj = {position: (Int,Int), napravlennost: Napravlennost, length: Int}
