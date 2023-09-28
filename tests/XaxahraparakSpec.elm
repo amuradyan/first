@@ -12,8 +12,12 @@ suite =
         pending =
             \() -> Expect.fail "pending"
     in
-    describe "Xaxahraparak generation"
-        [ test "creating prisitne xaxahraparaks" <|
+    describe "Խաղահրապարակի մասին"
+        [ test """
+          ՀԱՆՑ  Գյուղապետարան
+          ՊՏԻ   սարքեմ խաղահրապարակներ
+          ՈՐ    խաղան էրեխեքը
+          """ <|
             \() ->
                 let
                     gaugeXaxahraparak =
