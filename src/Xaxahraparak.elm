@@ -82,7 +82,13 @@ move planVector coordinate xaxahraparak =
             xaxahraparak |> populateMany (coordinate + 1) occupants >> clear coordinate
 
         _ ->
-            move (planVector - 1) (coordinate + 1) xaxahraparak
+            let
+                updatedXaxahraparak =
+                    xaxahraparak
+                        |> populateMany (coordinate + 1) occupants
+                        |> clear coordinate
+            in
+            move (planVector - 1) (coordinate + 1) updatedXaxahraparak
 
 
 occupantsOf : Coordinate -> OneDXaxahraparak -> List Occupant

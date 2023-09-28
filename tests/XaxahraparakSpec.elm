@@ -84,14 +84,15 @@ suite =
                         [ { occupants = [], x = 0 }, { occupants = [], x = 1 }, { occupants = [ Erexa ], x = 2 } ]
                 in
                 Expect.equal updatedXaxahraparak gaugeXaxahraparak
-
         , test "Դատարկ տեղը չես մաքրի" <|
             \() ->
                 let
                     prepopulatedXaxahraparak =
                         [ { occupants = [], x = 0 } ]
+
                     updatedXaxahraparak =
                         clear 0 prepopulatedXaxahraparak
+
                     gaugeXaxahraparak =
                         [ { occupants = [], x = 0 } ]
                 in
@@ -101,8 +102,10 @@ suite =
                 let
                     prepopulatedXaxahraparak =
                         [ { occupants = [ Erexa, Erexa ], x = 0 } ]
+
                     updatedXaxahraparak =
                         clear 0 prepopulatedXaxahraparak
+
                     gaugeXaxahraparak =
                         [ { occupants = [], x = 0 } ]
                 in
@@ -124,8 +127,8 @@ suite =
         , test "Լիքը տեղից կվեկալես" <|
             \() ->
                 let
-                    occupantsOfAnEmptyCell =
+                    occupants =
                         occupantsOf 0 [ { occupants = [ Erexa, Erexa, Garaj ], x = 0 } ]
                 in
-                Expect.equal occupantsOfAnEmptyCell [ Erexa, Erexa, Garaj ]
+                Expect.equal occupants [ Erexa, Erexa, Garaj ]
         ]
